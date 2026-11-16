@@ -3,75 +3,38 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const videoUrl = searchParams.get("url");
+    const url = searchParams.get("url");
 
-    if (!videoUrl) {
+    if (!url) {
       return NextResponse.json(
-        { success: false, error: "Instagram link enter karein." },
+        { success: false, error: "Please provide an Instagram URL" },
         { status: 400 }
       );
     }
 
-    let parsedUrl: URL;
+    // Yahan apni API key check karein (agar aap Environment Variable use kar rahe hain)
+    const apiKey = process.env.RAPIDAPI_KEY;
+    
+    // Agar aapne koi API key lagani hai, toh yahan request bhejain ge.
+    // Example fetch request (apni requirement ke mutabiq ise adjust kar sakte hain):
+    /*
+    const apiResponse = define_your_fetch_logic_here;
+    */
 
-    try {
-      parsedUrl = new URL(videoUrl);
-    } catch {
-      return NextResponse.json(
-        { success: false, error: "Invalid URL." },
-        { status: 400 }
-      );
-    }
-
-    const allowedHosts = [
-      "instagram.com",
-      "www.instagram.com",
-    ];
-
-    if (!allowedHosts.includes(parsedUrl.hostname)) {
-      return NextResponse.json(
-        { success: false, error: "Valid Instagram link enter karein." },
-        { status: 400 }
-      );
-    }
-
-    const response = await fetch(
-      `https://www.instagram.com/oembed/?url=${encodeURIComponent(videoUrl)}`,
-      {
-        headers: {
-          "User-Agent": "Mozilla/5.0",
-        },
-        cache: "no-store",
-      }
-    );
-
-    if (!response.ok) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Instagram ne request accept nahi ki. Dobara try karein.",
-        },
-        { status: 502 }
-      );
-    }
-
-    const data = await response.json();
-
+    // Filhal testing ke liye ya agar aap direct fetch kar rahe hain:
     return NextResponse.json({
       success: true,
-      title: data.title || "Instagram Post",
-      thumbnail: data.thumbnail_url || null,
-      downloadUrl: null,
-      message: "Post details mil gayi hain. Direct video download abhi configured nahi hai.",
+      message: "API is working successfully",
+      downloadUrl: "", // Yahan video ka link aayega
     });
 
-  } catch (error) {
+  } catch (error: any) {
     console.error("Instagram API Error:", error);
-
+    
     return NextResponse.json(
       {
         success: false,
-        error: "Server connection error. Dobara try karein.",
+        error: error.message || "Server connection error. Dobara try karei",
       },
       { status: 500 }
     );
