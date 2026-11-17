@@ -5,8 +5,9 @@ const RAPIDAPI_HOST =
 
 export async function GET(request: NextRequest) {
   try {
-    // Get Instagram URL
-    const instagramUrl = request.nextUrl.searchParams.get("url");
+    // Read URL from the incoming request
+    const requestUrl = new URL(request.url);
+    const instagramUrl = requestUrl.searchParams.get("url");
 
     if (!instagramUrl) {
       return NextResponse.json(
@@ -15,7 +16,6 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Validate Instagram URL
     let parsedUrl: URL;
 
     try {
@@ -31,11 +31,13 @@ export async function GET(request: NextRequest) {
       "instagram.com",
       "www.instagram.com",
       "m.instagram.com",
+      "instagr.am",
+      "www.instagr.am",
     ];
 
     if (
       !["http:", "https:"].includes(parsedUrl.protocol) ||
-      !allowedHosts.includes(parsedUrl.hostname)
+      !allowedHosts.includes(parsedUrl.hostname.toLowerCase())
     ) {
       return NextResponse.json(
         { success: false, error: "Please enter a valid Instagram link." },
@@ -43,7 +45,6 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Get API key from Vercel environment variables
     const apiKey = process.env.RAPIDAPI_KEY;
 
     if (!apiKey) {
@@ -53,7 +54,6 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Prepare RapidAPI request
     const apiUrl = new URL(
       `https://${RAPIDAPI_HOST}/instagram/video`
     );
@@ -70,7 +70,6 @@ export async function GET(request: NextRequest) {
       cache: "no-store",
     });
 
-    // Read API response
     const responseText = await apiResponse.text();
 
     let result: unknown;
@@ -83,7 +82,6 @@ export async function GET(request: NextRequest) {
       };
     }
 
-    // Handle API errors
     if (!apiResponse.ok) {
       return NextResponse.json(
         {
@@ -95,7 +93,6 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Return successful response
     return NextResponse.json(result, { status: 200 });
 
   } catch (error) {
