@@ -1,3 +1,6 @@
+import type { Metadata } from "next";
+import Script from "next/script";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.mediasave.live"),
 
@@ -50,3 +53,31 @@ export const metadata: Metadata = {
     },
   },
 };
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-H9CY0E8B38"
+          strategy="afterInteractive"
+        />
+
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-H9CY0E8B38');
+          `}
+        </Script>
+      </body>
+    </html>
+  );
+}
