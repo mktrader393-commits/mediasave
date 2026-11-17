@@ -1,11 +1,18 @@
-import { NextRequest, NextResponse } from "next/server";
+import {
+  connection,
+  NextRequest,
+  NextResponse,
+} from "next/server";
 
 const RAPIDAPI_HOST =
   "instagram-video-reel-downloader.p.rapidapi.com";
 
 export async function GET(request: NextRequest) {
+  // IMPORTANT: Keep this OUTSIDE the try/catch.
+  // Next.js uses this to stop build-time prerendering.
+  await connection();
+
   try {
-    // Read URL from the incoming request
     const requestUrl = new URL(request.url);
     const instagramUrl = requestUrl.searchParams.get("url");
 
@@ -22,7 +29,7 @@ export async function GET(request: NextRequest) {
       parsedUrl = new URL(instagramUrl);
     } catch {
       return NextResponse.json(
-        { success: false, error: "Invalid URL." },
+        { success: false, error: "Invalid Instagram URL." },
         { status: 400 }
       );
     }
@@ -40,7 +47,10 @@ export async function GET(request: NextRequest) {
       !allowedHosts.includes(parsedUrl.hostname.toLowerCase())
     ) {
       return NextResponse.json(
-        { success: false, error: "Please enter a valid Instagram link." },
+        {
+          success: false,
+          error: "Please enter a valid Instagram link.",
+        },
         { status: 400 }
       );
     }
@@ -49,7 +59,10 @@ export async function GET(request: NextRequest) {
 
     if (!apiKey) {
       return NextResponse.json(
-        { success: false, error: "API key is not configured." },
+        {
+          success: false,
+          error: "API key is not configured.",
+        },
         { status: 500 }
       );
     }
@@ -83,6 +96,8 @@ export async function GET(request: NextRequest) {
     }
 
     if (!apiResponse.ok) {
+      console.error("RapidAPI error:", result);
+
       return NextResponse.json(
         {
           success: false,
@@ -93,8 +108,12 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    return NextResponse.json(result, { status: 200 });
-
+    return NextResponse.json(result, {
+      status: 200,
+      headers: {
+        "Cache-Control": "no-store",
+      },
+    });
   } catch (error) {
     console.error("Download API error:", error);
 
