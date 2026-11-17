@@ -1,60 +1,84 @@
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const url = searchParams.get('url');
+
+  if (!url) {
+    return NextResponse.json(
+      { success: false, error: 'Instagram URL is missing' },
+      { status: 400 }
+    );
+  }
+
+  if (!url.includes('instagram.com/')) {
+    return NextResponse.json(
+      { success: false, error: 'Invalid Instagram URL' },
+      { status: 400 }
+    );
+  }
+
+  const apiKey = process.env.RAPIDAPI_KEY;
+
+  if (!apiKey) {
+    return NextResponse.json(
+      { success: false, error: 'API key is missing' },
+      { status: 500 }
+    );
+  }
+
   try {
-    const { searchParams } = new URL(request.url);
-    const url = searchParams.get('url');
+    const apiResponse = await fetch(
+      `https://instagram-video-reel-downloader.p.rapidapi.com/instagram/video?url=${encodeURIComponent(url)}`,
+      {
+        method: 'GET',
+        headers: {
+          'x-rapidapi-host':
+            'instagram-video-reel-downloader.p.rapidapi.com',
+          'x-rapidapi-key': apiKey,
+        },
+        cache: 'no-store',
+      }
+    );
 
-    if (!url || !url.includes('instagram.com')) {
+    const data = await apiResponse.json();
+
+    if (!apiResponse.ok) {
       return NextResponse.json(
-        { success: false, error: "Please provide a valid Instagram URL" },
-        { status: 400 }
+        {
+          success: false,
+          error: data?.message || 'RapidAPI request failed',
+        },
+        { status: apiResponse.status }
       );
     }
 
-    let downloadUrl = "";
+    const downloadUrl =
+      data?.videoUrl ||
+      data?.downloads?.[0]?.downloadUrl ||
+      data?.data?.videoUrl ||
+      data?.data?.downloads?.[0]?.downloadUrl ||
+      data?.result?.videoUrl ||
+      data?.url;
 
-    // 1st API Try karein
-    try {
-      const res1 = await fetch(`https://api.siputzx.my.id/api/d/igdl?url=${encodeURIComponent(url)}`);
-      const data1 = await res1.json();
-      if (data1 && data1.status && data1.data && data1.data.length > 0) {
-        downloadUrl = data1.data[0].url;
-      }
-    } catch (e) {
-      console.log("API 1 failed, trying fallback...");
-    }
-
-    // Agar 1st fail ho jaye toh 2nd free endpoint try karein
     if (!downloadUrl) {
-      try {
-        const res2 = await fetch(`https://instagram.guru/api?url=${encodeURIComponent(url)}`);
-        const data2 = await res2.json();
-        if (data2 && data2.download_url) {
-          downloadUrl = data2.download_url;
-        }
-      } catch (e) {
-        console.log("API 2 failed too.");
-      }
-    }
-
-    // Agar phir bhi link na mile toh user ko saaf error dein
-    if (!downloadUrl) {
-      return NextResponse.json(
-        { success: false, error: "Instagram servers are busy. Please try a different reel link." },
-        { status: 500 }
-      );
+      return NextResponse.json({
+        success: false,
+        error: 'Video URL not found in API response',
+      });
     }
 
     return NextResponse.json({
       success: true,
-      downloadUrl: downloadUrl,
+      downloadUrl,
     });
 
-  } catch (error: any) {
-    console.error("Download Error:", error);
+  } catch (error) {
     return NextResponse.json(
-      { success: false, error: "Server error. Please try again later." },
+      {
+        success: false,
+        error: 'Server error. Please try again.',
+      },
       { status: 500 }
     );
   }
