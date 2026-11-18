@@ -5,13 +5,13 @@ import Script from "next/script";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.mediasave.live"),
 
-  title: {
-    default: "Instagram Video Downloader - MediaSave",
-    template: "%s | MediaSave",
-  },
+ title: {
+  default: "Instagram Video Downloader & Reels Saver | MediaSave",
+  template: "%s | MediaSave",
+},
 
-  description:
-    "Download Instagram Reels and videos online with MediaSave. A simple, free and fast Instagram video downloader. No registration required.",
+ description:
+  "Download Instagram Reels and videos online with MediaSave. Paste a public Instagram link to save supported videos for free. No registration required.",
 
   applicationName: "MediaSave",
 
@@ -28,22 +28,22 @@ export const metadata: Metadata = {
     "MediaSave",
   ],
 
-  openGraph: {
-    title: "Instagram Video Downloader - MediaSave",
-    description:
-      "Download Instagram Reels and videos online with MediaSave. Simple, fast and free.",
-    url: "https://www.mediasave.live",
-    siteName: "MediaSave",
-    locale: "en_US",
-    type: "website",
-  },
+ openGraph: {
+  title: "Instagram Video Downloader & Reels Saver | MediaSave",
+ description:
+  "Download Instagram Reels and videos online with MediaSave. Paste a public Instagram link to save supported videos for free. No registration required.",
+  url: "https://www.mediasave.live",
+  siteName: "MediaSave",
+  locale: "en_US",
+  type: "website",
+},
 
-  twitter: {
-    card: "summary",
-    title: "Instagram Video Downloader - MediaSave",
-    description:
-      "Download Instagram Reels and videos online with MediaSave.",
-  },
+twitter: {
+  card: "summary",
+  title: "Instagram Video Downloader & Reels Saver | MediaSave",
+  description:
+  "Download Instagram Reels and videos online with MediaSave. Paste a public Instagram link to save supported videos for free. No registration required.",
+},
 
   robots: {
     index: true,
