@@ -321,14 +321,13 @@ export default function Home() {
 
                   <div className="flex flex-wrap gap-3">
                     <a
-                      href={downloadUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-emerald-700"
-                    >
-                      <span>↓</span>
-                      Download Video
-                    </a>
+  href={`/api/file?url=${encodeURIComponent(downloadUrl)}`}
+  download="MediaSave-Video.mp4"
+  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-emerald-700"
+>
+  <span>↓</span>
+  Download Video
+</a>
 
                     <button
                       type="button"
