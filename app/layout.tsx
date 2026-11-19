@@ -63,7 +63,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+  <Script
+    id="google-adsense"
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3122810728432344"
+    strategy="beforeInteractive"
+    crossOrigin="anonymous"
+  />
+
+  {children}
 
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-H9CY0E8B38"
