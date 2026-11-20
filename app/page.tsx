@@ -2,16 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "MediaSave - Free Instagram, TikTok & Pinterest Video Downloader",
+  title: "Free Instagram, TikTok & Pinterest Video Downloader",
   description:
-    "Download public Instagram Reels, TikTok videos without watermark and Pinterest videos for free. Fast, simple and easy online video downloader.",
+    "Download public Instagram Reels, TikTok videos and Pinterest video Pins online for free with MediaSave. Fast, simple and easy video downloading on mobile and desktop.",
   alternates: {
     canonical: "https://www.mediasave.live",
   },
   openGraph: {
-    title: "MediaSave - Your Favorite Media, Saved in Seconds",
+    title: "Free Instagram, TikTok & Pinterest Video Downloader | MediaSave",
     description:
-      "Download videos from Instagram, TikTok and Pinterest with MediaSave. Free, fast and easy to use.",
+      "Save supported public Instagram Reels, TikTok videos and Pinterest video Pins with MediaSave. Free and easy online video downloader.",
     url: "https://www.mediasave.live",
     siteName: "MediaSave",
     type: "website",
@@ -174,9 +174,9 @@ export default function Home() {
           </div>
 
           <h1 className="mt-8 text-4xl font-black leading-[1.12] tracking-tight sm:text-6xl lg:text-7xl">
-            Your Favorite Media,
+            Free Instagram, TikTok & Pinterest
             <span className="mt-2 block bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-              Saved in Seconds.
+              Video Downloader
             </span>
           </h1>
 
@@ -420,8 +420,7 @@ export default function Home() {
               </span>
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-8 text-slate-400">
-              Your favorite media, saved in seconds. Explore simple online
-              downloader tools for Instagram, TikTok and Pinterest.
+              Download supported public videos from Instagram, TikTok and Pinterest with MediaSave. Explore our free online video downloader tools.
             </p>
           </div>
 
