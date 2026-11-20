@@ -240,14 +240,35 @@ export async function POST(request: NextRequest) {
     const videoUrl = extractVideoUrl(html);
 
     if (!videoUrl) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "No supported public MP4 video was found. This Pin may be restricted or use an unsupported video format.",
-        },
-        { status: 404 }
-      );
+  const finalHost = (() => {
+    try {
+      return new URL(response.url || submittedUrl).hostname;
+    } catch {
+      return "unknown";
     }
+  })();
+
+  const diagnostics = {
+    status: response.status,
+    finalHost,
+    contentType,
+    htmlLength: html.length,
+    containsPinimg: /pinimg\.com/i.test(html),
+    containsMp4: /\.mp4/i.test(html),
+    looksLikeChallenge:
+      /captcha|robot|verify you are human|access denied|temporarily blocked/i.test(
+        html
+      ),
+  };
+
+  return NextResponse.json(
+    {
+      success: false,
+      error: `No supported public MP4 video was found. Diagnostic: ${JSON.stringify(diagnostics)}`,
+    },
+    { status: 404 }
+  );
+}
 
     const downloadUrl =
       `/api/pinterest-download?media=${encodeURIComponent(videoUrl)}`;
