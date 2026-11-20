@@ -162,11 +162,19 @@ export default function Home() {
           </div>
 
           <a
-            href="#how-it-works"
-            className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold transition hover:border-violet-300 hover:text-violet-700"
-          >
-            How it works
-          </a>
+  href="#how-it-works"
+  className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold transition hover:border-violet-300 hover:text-violet-700"
+>
+  How it works
+</a>
+
+<a
+  href="/pinterest-video-downloader"
+  className="rounded-full border border-violet-200 bg-violet-50 px-3 py-2 text-xs font-semibold text-violet-700 transition hover:bg-violet-100 sm:px-4 sm:text-sm"
+>
+  <span className="sm:hidden">Pinterest</span>
+  <span className="hidden sm:inline">Pinterest Downloader</span>
+</a>
         </div>
       </header>
 

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import PinterestDownloader from "./PinterestDownloader";
 
 export const metadata: Metadata = {
-  title: "Pinterest Video Downloader – Download Pinterest Videos | MediaSave",
+  title: "Pinterest Video Downloader - Download Pinterest Videos Free | MediaSave",
   description:
-    "Download public Pinterest videos online for free with MediaSave. Paste a Pinterest video Pin link and save supported videos easily.",
+  "Download Pinterest videos online for free with MediaSave. Paste a public Pinterest video Pin link and save supported videos quickly. No registration required.",
   alternates: {
     canonical: "/pinterest-video-downloader",
   },
