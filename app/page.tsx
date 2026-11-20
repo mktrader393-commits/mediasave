@@ -4,14 +4,14 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Free Instagram, TikTok & Pinterest Video Downloader",
   description:
-    "Download public Instagram Reels, TikTok videos and Pinterest video Pins online for free with MediaSave. Fast, simple and easy video downloading on mobile and desktop.",
+  "Free online video downloader for public Instagram Reels, TikTok videos and Pinterest video Pins. No account needed. Simple downloads on any device.",
   alternates: {
     canonical: "https://www.mediasave.live",
   },
   openGraph: {
     title: "Free Instagram, TikTok & Pinterest Video Downloader | MediaSave",
     description:
-      "Save supported public Instagram Reels, TikTok videos and Pinterest video Pins with MediaSave. Free and easy online video downloader.",
+  "Download supported public Instagram Reels, TikTok videos and Pinterest video Pins with MediaSave. Free, simple and mobile-friendly.",
     url: "https://www.mediasave.live",
     siteName: "MediaSave",
     type: "website",
