@@ -283,6 +283,64 @@ export default function TikTokDownloader() {
             </div>
           </div>
 
+<div className="mt-12 border-t border-gray-100 pt-10">
+            <h2 className="text-2xl font-bold text-center">
+              TikTok Video Downloader Without Watermark
+            </h2>
+
+            <div className="mt-5 space-y-4 text-sm leading-7 text-gray-600">
+              <p>
+                MediaSave is a free TikTok Video Downloader that helps you
+                download public TikTok videos without a watermark when a
+                watermark-free download is available. You can use this online
+                TikTok downloader directly in your browser without installing
+                an app or creating an account.
+              </p>
+
+              <p>
+                To use the TikTok Video Downloader, copy the link of a public
+                TikTok video and paste it into the download box above. Select
+                Download and wait while MediaSave processes the video. If the
+                source supports HD quality, you may be able to download the
+                video in HD. Available quality depends on the original video
+                and its source.
+              </p>
+
+              <p>
+                This tool is designed to make downloading supported public
+                TikTok videos simple on mobile phones, tablets and computers.
+                Please respect creators' rights and only download or share
+                videos when you own them or have permission.
+              </p>
+
+              <p>
+                Looking for other video download tools? You can also use
+                MediaSave's{" "}
+                <a
+                  href="/instagram-video-downloader"
+                  className="font-semibold text-pink-600 hover:underline"
+                >
+                  Instagram Video Downloader
+                </a>{" "}
+                or{" "}
+                <a
+                  href="/pinterest-video-downloader"
+                  className="font-semibold text-pink-600 hover:underline"
+                >
+                  Pinterest Video Downloader
+                </a>
+                . Visit the{" "}
+                <a
+                  href="/"
+                  className="font-semibold text-pink-600 hover:underline"
+                >
+                  MediaSave homepage
+                </a>{" "}
+                to explore all available tools.
+              </p>
+            </div>
+          </div>
+          
           <p className="mt-8 text-center text-xs leading-6 text-gray-500">
             MediaSave is an independent service and is not affiliated with
             TikTok. Only download videos you own or have permission to use.
