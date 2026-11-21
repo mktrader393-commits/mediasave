@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Instagram Video Downloader - Download Reels | MediaSave",
+ title: "Instagram Video Downloader - Download Reels",
   description:
     "Download public Instagram Reels and videos online for free with MediaSave. Paste an Instagram link and save supported videos without registration.",
   alternates: {
